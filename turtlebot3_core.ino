@@ -16,6 +16,28 @@
 
 /* Authors: Yoonseok Pyo, Leon Jung, Darby Lim, HanCheol Cho, Gilbert */
 
+/*******************************************************************************
+* Modifications copyright (C) 2021 Marius Niemenmaa
+* 
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*******************************************************************************/
+
+/* Modifications include new functions and corresponding function calls: updateLeds, updateStepperMotors
+*  Modifications include new class usage "MotorController"
+*  Modifications include new way of calling controllers.getRCData()
+*  Modifications include declaration of used led_pins and including "opencr_pins.h"
+*/
+
 #include "turtlebot3_core_config.h"
 #include "opencr_pins.h"
 
