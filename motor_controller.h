@@ -48,6 +48,7 @@ private:
     int limit_switch_bw_;
 
     const int number_of_steps_ = 8;
+    const int steps_per_revolution_ = 64;
     int current_step_;
 
     unsigned long step_delay_; // ms

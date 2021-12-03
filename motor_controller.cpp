@@ -21,12 +21,12 @@ MotorController::MotorController(int in1, int in2, int in3, int in4, int limit_s
     if (limit_switch_bw_ != NOT_DEFINED)
         pinMode(this->limit_switch_bw_, INPUT);
 
-    setSpeed(100L);
+    setSpeed(1000L);
 }
 
 void MotorController::setSpeed(long rpm)
 {
-  this->step_delay_ = 60L * 1000L * 1000L / this->number_of_steps_ / rpm;
+  this->step_delay_ = (60L * 1000L * 1000L / this->steps_per_revolution_) / rpm;
 }
 
 void MotorController::step_(int stepIndex)

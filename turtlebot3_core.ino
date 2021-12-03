@@ -191,13 +191,15 @@ void updateStepperMotors(uint16_t data) {
   else if (data & RC100_BTN_3)
     crane_motor->stepBackward(1);
   else if (data & RC100_BTN_4) {
-    gripper_left_motor->stepForward(1);
-    gripper_right_motor->stepForward(1);
+    gripper_left_motor->stepForward(50);
+    gripper_right_motor->stepForward(50);
   }
 }
 
 void updateLeds(uint16_t data)
 {
+  Serial.println("update leds start with data");
+  Serial.println(data);
   if (data == 0) {
     for (size_t i = 0; i < 4; i++)
       digitalWrite(led_pin_user[i], HIGH);
