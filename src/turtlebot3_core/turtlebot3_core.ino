@@ -209,14 +209,14 @@ void updateStepperMotors(uint16_t data) {
   if (data & RC100_BTN_1)
     crane_motor->stepForward(20);
   else if (data & RC100_BTN_2) {
-    gripper_left_motor->stepBackward(50);
-    gripper_right_motor->stepBackward(50);
+    gripper_left_motor->stepBackward(20);
+    gripper_right_motor->stepForward(20);
   }
   else if (data & RC100_BTN_3)
     crane_motor->stepBackward(20);
   else if (data & RC100_BTN_4) {
-    gripper_left_motor->stepForward(50);
-    gripper_right_motor->stepForward(50);
+    gripper_left_motor->stepForward(20);
+    gripper_right_motor->stepBackward(20);
   }
 }
 
