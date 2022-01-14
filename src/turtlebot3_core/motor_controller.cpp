@@ -101,9 +101,6 @@ void MotorController::step_(int stepIndex)
 
 bool MotorController::stepForward(int steps)
 {
-    if (!limitSwitchAllowsMoving_(this->limit_switch_fw_))
-        return false;
-    
     while (steps > 0) {
         unsigned long time_since_last_step = micros() - this->last_step_time_;
 
@@ -111,6 +108,9 @@ bool MotorController::stepForward(int steps)
             // delay_ms(this->step_delay_ - time_since_last_step);
             continue;
         }
+
+        if (!limitSwitchAllowsMoving_(this->limit_switch_fw_))
+            return false;
 
         this->last_step_time_ = micros();
 
@@ -128,9 +128,6 @@ bool MotorController::stepForward(int steps)
 
 bool MotorController::stepBackward(int steps) 
 {
-    if (!limitSwitchAllowsMoving_(this->limit_switch_bw_))
-        return false;
-
     while (steps > 0) {
         unsigned long time_since_last_step = micros() - this->last_step_time_;
 
@@ -138,6 +135,9 @@ bool MotorController::stepBackward(int steps)
             // delay_ms(this->step_delay_ - time_since_last_step);
             continue;
         }
+
+        if (!limitSwitchAllowsMoving_(this->limit_switch_bw_))
+            return false;
 
         this->last_step_time_ = micros();
 
