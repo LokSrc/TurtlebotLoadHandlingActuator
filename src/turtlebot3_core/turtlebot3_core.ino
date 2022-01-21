@@ -17,7 +17,7 @@
 /* Authors: Yoonseok Pyo, Leon Jung, Darby Lim, HanCheol Cho, Gilbert */
 
 /*******************************************************************************
-* Modifications copyright (C) 2021 Marius Niemenmaa
+* Modifications copyright (C) 2022 Marius Niemenmaa
 * 
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -180,7 +180,7 @@ void loop()
   updateStepperMotors(number_data);
   
   // Check push button pressed for simple test drive
-  driveTest(diagnosis.getButtonPress(3000));
+  // driveTest(diagnosis.getButtonPress(3000));
 
   // Update the IMU unit
   sensors.updateIMU();

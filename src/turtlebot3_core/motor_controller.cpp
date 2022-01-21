@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Copyright (C) 2021 Marius Niemenmaa 
+* Copyright (C) 2022 Marius Niemenmaa 
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -157,8 +157,25 @@ bool MotorController::limitSwitchAllowsMoving_(int switch_pin)
 {
     if (switch_pin == NOT_DEFINED)
         return true;
-    
-    return HIGH == digitalRead(switch_pin);
+
+    bool pin_state = digitalRead(switch_pin);
+    if (pin_state == LOW)
+      return true;
+
+    #ifdef DEBUG
+    return limitSwitchBypassActive_(switch_pin);
+    #endif
+
+    return false;
+}
+
+bool MotorController::limitSwitchBypassActive_(int limiting_pin) 
+{
+  int bypassing_pin = this->limit_switch_fw_ == limiting_pin ? this->limit_switch_bw_ : this->limit_switch_fw_;
+  if (bypassing_pin == NOT_DEFINED)
+    return false;
+
+  return digitalRead(bypassing_pin) == HIGH;
 }
 
 } // namespace LokSrc

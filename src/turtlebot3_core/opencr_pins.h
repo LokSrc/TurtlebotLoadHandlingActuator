@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Copyright (C) 2021 Marius Niemenmaa 
+* Copyright (C) 2022 Marius Niemenmaa 
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -53,14 +53,14 @@
 #define GRIPPER_R_MOTOR_DRIVER_IN3 TB_BDPIN_GPIO_17
 #define GRIPPER_R_MOTOR_DRIVER_IN4 TB_BDPIN_GPIO_19
 
-#define CRANE_FW_LIMIT_SWITCH_ NOT_DEFINED
-#define CRANE_BW_LIMIT_SWITCH_ NOT_DEFINED
+#define CRANE_FW_LIMIT_SWITCH_ TB_BDPIN_GPIO_3
+#define CRANE_BW_LIMIT_SWITCH_ TB_BDPIN_GPIO_5
 
-#define GRIPPER_L_FW_LIMIT_SWITCH_ NOT_DEFINED
+#define GRIPPER_L_FW_LIMIT_SWITCH_ TB_BDPIN_GPIO_7
 #define GRIPPER_L_BW_LIMIT_SWITCH_ NOT_DEFINED
 
 #define GRIPPER_R_FW_LIMIT_SWITCH_ NOT_DEFINED
-#define GRIPPER_R_BW_LIMIT_SWITCH_ NOT_DEFINED
+#define GRIPPER_R_BW_LIMIT_SWITCH_ TB_BDPIN_GPIO_9
 
 #define NOT_DEFINED -1
 

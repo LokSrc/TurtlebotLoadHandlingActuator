@@ -17,7 +17,7 @@
 /* Authors: Yoonseok Pyo, Leon Jung, Darby Lim, HanCheol Cho, Gilbert */
 
 /*******************************************************************************
-* Modifications copyright (C) 2021 Marius Niemenmaa
+* Modifications copyright (C) 2022 Marius Niemenmaa
 * 
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
