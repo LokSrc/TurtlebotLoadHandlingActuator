@@ -3,9 +3,10 @@ This project was developed as part of course [KONE.533 - Robotics project work](
 Goal of this project was to design and implement working actuator for [Turtlebot 3 Waffle Pi](https://www.robotis.us/turtlebot-3-waffle-pi/) that can move and stack pallets.
 
 # Working principle
-We ended up using a simple design... 
+We ended up using a simple design where 3 separate stepper motors are responsible of all the moving operations of the actuator.
+Transfering force from stepper motor to linear motion is done with simple gear+rail system. Limit switches were added to prevent damage caused by driving gears over the limits.
 
-TODO
+![Finished application](/resources/turtlebot_with_actuator.png)
 
 # Software installation
 ## Step 0: Install custom OpenCR firmware to arduino IDE
@@ -28,13 +29,20 @@ Use arduino IDE (or other editor with arduino support) to verify and upload sket
 Verify button is highlighted in the picture above and upload button is right next to it
 
 # Parts list
-TODO
+<ul>
+  <li>3x CX28BYJ-48-08 stepper motors</li>
+  <li>3x ULN2003A motor drivers</li>
+  <li>4x MKSLSS5GLFT limit switches (6x if inner gripper motion is limited as well)</li>
+  <li>1x Turtlebot3 Waffle Pi</li>
+</ul>
 
 # Electrical diagrams
-TODO
+![Electical diagram](/resources/electrical_diagram.png)
 
 # 3D Models
-TODO
+Due to licensing challenges, 3D models are not made publicly available
 
 # Project developers
-TODO
+Marius Niemenmaa,
+Aleksi Luukkonen &
+Kristian Klemets
