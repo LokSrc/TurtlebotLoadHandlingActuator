@@ -16,7 +16,7 @@
 
 #ifndef MOTOR_CONTROLLER_H
 #define MOTOR_CONTROLLER_H
-#define DEBUG
+#define DEBUG_LOKSRC
 
 #include "opencr_pins.h"
 
@@ -82,6 +82,7 @@ private:
 
     unsigned long step_delay_; // ms
     unsigned long last_step_time_;
+    bool stepping_in_progress_ = false;
 }; // class MotorController
 
 } // namespace LokSrc

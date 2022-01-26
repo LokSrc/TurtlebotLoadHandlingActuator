@@ -83,7 +83,7 @@ void setup()
   crane_motor = new LokSrc::MotorController(CRANE_MOTOR_DRIVER_IN1, CRANE_MOTOR_DRIVER_IN2, CRANE_MOTOR_DRIVER_IN3, 
     CRANE_MOTOR_DRIVER_IN4, CRANE_FW_LIMIT_SWITCH_, CRANE_BW_LIMIT_SWITCH_);
 
-  crane_motor->setSpeed(500L);
+  crane_motor->setSpeed(300L);
 
   // Setting for Dynamixel motors
   motor_driver.init(NAME);
@@ -207,16 +207,16 @@ void loop()
 
 void updateStepperMotors(uint16_t data) {
   if (data & RC100_BTN_1)
-    crane_motor->stepForward(20);
+    crane_motor->stepForward(17);
   else if (data & RC100_BTN_2) {
-    gripper_left_motor->stepBackward(20);
-    gripper_right_motor->stepForward(20);
+    gripper_left_motor->stepBackward(10);
+    gripper_right_motor->stepForward(10);
   }
   else if (data & RC100_BTN_3)
-    crane_motor->stepBackward(20);
+    crane_motor->stepBackward(17);
   else if (data & RC100_BTN_4) {
-    gripper_left_motor->stepForward(20);
-    gripper_right_motor->stepBackward(20);
+    gripper_left_motor->stepForward(10);
+    gripper_right_motor->stepBackward(10);
   }
 }
 
