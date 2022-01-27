@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Copyright (C) 2021 Marius Niemenmaa 
+* Copyright (C) 2022 Marius Niemenmaa 
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -33,11 +33,11 @@ MotorController::MotorController(int in1, int in2, int in3, int in4, int limit_s
     pinMode(this->control_in4_, OUTPUT);
 
     if (limit_switch_fw_ != NOT_DEFINED)
-        pinMode(this->limit_switch_fw_, INPUT);
+        pinMode(this->limit_switch_fw_, INPUT_PULLDOWN);
     if (limit_switch_bw_ != NOT_DEFINED)
-        pinMode(this->limit_switch_bw_, INPUT);
+        pinMode(this->limit_switch_bw_, INPUT_PULLDOWN);
 
-    setSpeed(1000L);
+    setSpeed(300L);
 }
 
 void MotorController::setSpeed(long rpm)
@@ -102,13 +102,17 @@ void MotorController::step_(int stepIndex)
 bool MotorController::stepForward(int steps)
 {
     if (!limitSwitchAllowsMoving_(this->limit_switch_fw_))
-        return false;
-    
+      return false;
+
+    if (this->stepping_in_progress_)
+      return false;
+
+    this->stepping_in_progress_ = true;
     while (steps > 0) {
         unsigned long time_since_last_step = micros() - this->last_step_time_;
 
         if (time_since_last_step < this->step_delay_) {
-            // delay_ms(this->step_delay_ - time_since_last_step);
+            delayMicroseconds(this->step_delay_ - time_since_last_step);
             continue;
         }
 
@@ -123,6 +127,7 @@ bool MotorController::stepForward(int steps)
         steps--;
     }
 
+    this->stepping_in_progress_ = false;
     return true;
 }
 
@@ -130,13 +135,18 @@ bool MotorController::stepBackward(int steps)
 {
     if (!limitSwitchAllowsMoving_(this->limit_switch_bw_))
         return false;
+        
+    if (this->stepping_in_progress_)
+      return false;
+
+    this->stepping_in_progress_ = true;
 
     while (steps > 0) {
         unsigned long time_since_last_step = micros() - this->last_step_time_;
 
         if (time_since_last_step < this->step_delay_) {
-            // delay_ms(this->step_delay_ - time_since_last_step);
-            continue;
+             delayMicroseconds(this->step_delay_ - time_since_last_step);
+             continue;
         }
 
         this->last_step_time_ = micros();
@@ -150,6 +160,7 @@ bool MotorController::stepBackward(int steps)
         steps--;
     }
 
+    this->stepping_in_progress_ = false;
     return true;
 }
 
@@ -157,8 +168,25 @@ bool MotorController::limitSwitchAllowsMoving_(int switch_pin)
 {
     if (switch_pin == NOT_DEFINED)
         return true;
-    
-    return HIGH == digitalRead(switch_pin);
+
+    bool pin_state = digitalRead(switch_pin);
+    if (pin_state == LOW)
+      return true;
+
+    #ifdef DEBUG_LOKSRC
+    return limitSwitchBypassActive_(switch_pin);
+    #endif
+
+    return false;
+}
+
+bool MotorController::limitSwitchBypassActive_(int limiting_pin) 
+{
+  int bypassing_pin = this->limit_switch_fw_ == limiting_pin ? this->limit_switch_bw_ : this->limit_switch_fw_;
+  if (bypassing_pin == NOT_DEFINED)
+    return false;
+
+  return digitalRead(bypassing_pin) == HIGH;
 }
 
 } // namespace LokSrc

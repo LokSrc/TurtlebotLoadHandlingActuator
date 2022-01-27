@@ -1,5 +1,5 @@
 /*******************************************************************************
-* Copyright (C) 2021 Marius Niemenmaa 
+* Copyright (C) 2022 Marius Niemenmaa 
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
 * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 #ifndef MOTOR_CONTROLLER_H
 #define MOTOR_CONTROLLER_H
+#define DEBUG_LOKSRC
 
 #include "opencr_pins.h"
 
@@ -37,7 +38,7 @@ public:
      * 
      * @param steps to step forward 
      * @return true if succesfull
-     * @return false if not succesfull (limit switch 1 prevents moving)
+     * @return false if not succesfull (limit switch fw prevents moving)
      */
     bool stepForward(int steps);
 
@@ -46,7 +47,7 @@ public:
      * 
      * @param steps to step backward 
      * @return true if succesfull
-     * @return false if not succesfull (limit switch 2 prevents moving)
+     * @return false if not succesfull (limit switch bw prevents moving)
      */
     bool stepBackward(int steps);
 
@@ -54,6 +55,18 @@ private:
     void step_(int stepIndex);
 
     bool limitSwitchAllowsMoving_(int limit_switch_pin);
+
+    /**
+     * @brief Will return true if both limit switches are passing HIGH signal
+     * 
+     * If debug mode is on and both limit switches are active, motor is allowed to move
+     * Used to drive motor off the rail when mechanical work is required
+     * 
+     * @param limiting_pin: pin number for limit switch limiting fw/bw movement
+     * @return true if limit switches can be ignored
+     * @return false if other limit switch is not in HIGH state or not defined
+     */
+    bool limitSwitchBypassActive_(int limiting_pin);
 
     int control_in1_;
     int control_in2_;
@@ -69,6 +82,7 @@ private:
 
     unsigned long step_delay_; // ms
     unsigned long last_step_time_;
+    bool stepping_in_progress_ = false;
 }; // class MotorController
 
 } // namespace LokSrc
