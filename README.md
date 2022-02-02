@@ -10,7 +10,10 @@ Transfering force from stepper motor to linear motion is done with simple gear+r
 
 # Software installation
 ## Step 0: Install custom OpenCR firmware to arduino IDE
-Follow the instuctions from [LIBRARY_INSTALL.md](/LIBRARY_INSTALL.md)
+### NOTE: Since pull request to original repo has been merged and published as package there is no need to install custom version of library anymore.
+You can follow the guide found at [Official OpenCR site](https://emanual.robotis.com/docs/en/parts/controller/opencr10/#arduino-ide). Make sure you install version 1.4.19 or newer.
+
+~~Follow the instuctions from [LIBRARY_INSTALL.md](/LIBRARY_INSTALL.md)~~
 
 ## Step 1: Clone repo
 Command: ```git clone https://github.com/LokSrc/TurtlebotLoadHandlingActuator.git```
