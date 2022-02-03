@@ -6,7 +6,7 @@ Goal of this project was to design and implement working actuator for [Turtlebot
 We ended up using a simple design where 3 separate stepper motors are responsible of all the moving operations of the actuator.
 Transfering force from stepper motor to linear motion is done with simple gear+rail system. Limit switches were added to prevent damage caused by driving gears over the limits.
 
-![Finished application](/resources/turtlebot_with_actuator.png)
+[![Finished application video](https://img.youtube.com/vi/C0iPgLaQcvY/0.jpg)](https://youtu.be/C0iPgLaQcvY)
 
 # Software installation
 ## Step 0: Install custom OpenCR firmware to arduino IDE
